@@ -140,4 +140,10 @@ group by f.codfilm, f.titolo
 
 /*23*/
 
+select count(a.nome), f.titolo, max(a.annoNascita)
+from film f join recita r on f.codfilm=r.codfilm join attori a on a.codattore=r.codattore
+    join (select codattore from attori where annoNascita<1970) j on j.codattore=a.codattore
+group by f.titolo
+
+/*24*/
 
