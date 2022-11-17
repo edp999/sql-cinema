@@ -116,3 +116,18 @@ from film f join proiezioni p on f.codfilm=p.codfilm left join(select codFilm, c
                                                     on j.codfilm = f.codfilm
 where f.regista = 'George Lucas'
 group by f.titolo, j.conto
+
+/*20*/
+
+select f.regista, a.nome, count(a.nome) as n_film_insieme
+from film f join recita r on f.codfilm=r.codfilm join attori a on a.codattore=r.codattore
+group by f.regista, a.nome
+order by f.regista
+
+/*21*/
+
+select f.regista, f.titolo, count(a.nome)
+from film f join recita r on f.codfilm=r.codfilm join attori a on a.codattore=r.codattore
+group by f.titolo, f.regista
+having count(a.nome)>2
+
