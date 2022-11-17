@@ -107,3 +107,12 @@ from film f join proiezioni p on f.codfilm=p.codfilm
 group by f.regista
 
 /*19*/
+
+select f.titolo, j.conto, sum(p.incasso)
+from film f join proiezioni p on f.codfilm=p.codfilm left join(select codFilm, count(codProiezione) as conto from proiezioni p 
+                                                                join sale s on p.codsala=s.codsala
+                                                                where citta = 'Roma'
+                                                                group by codfilm) as j
+                                                    on j.codfilm = f.codfilm
+where f.regista = 'George Lucas'
+group by f.titolo, j.conto
