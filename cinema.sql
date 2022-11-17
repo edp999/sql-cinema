@@ -66,4 +66,33 @@ having a.nazionalita='Italiana'
 
 /*12*/
 
+select f.titolo, s.nome
+from film f join proiezioni p on f.codfilm=p.codfilm join sale s on p.codsala=s.codsala
+where extract(YEAR FROM p.dataProiezione)='2004' and s.citta= 'Napoli'
+
+/*13*/
+
+select count(s.codsala)
+from sale s 
+where s.posti>60 and s.citta='Napoli'
+group by s.codsala
+
+/*14*/
+
+select sum(s.posti)
+from sale s 
+
+/*15*/
+
+select count(s.codsala), s.citta
+from sale s
+group by s.citta
+
+/*16*/
+
+select count(j.codsala)
+from sale s left join (select codsala from sale where posti>150) j on s.codsala=j.codsala
+group by s.citta
+
+/*17*/
 
