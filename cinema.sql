@@ -184,3 +184,42 @@ where f.titolo not in (select f.titolo from film f join proiezioni p on f.codfil
 
 /*29*/
 
+select f.titolo
+from film f join proiezioni p on f.codfilm=p.codfilm
+where f.titolo not in (select f.titolo from film f join proiezioni p on f.codfilm=p.codfilm join
+                        sale s on p.codsala=s.codsala
+                        where s.citta!='Milano')
+
+/*30*/
+
+select f.titolo
+from film f join proiezioni p on f.codfilm=p.codfilm
+where f.titolo not in (select f.titolo from film f join proiezioni p on f.codfilm=p.codfilm
+                        where p.incasso>500)
+
+/*31*/
+
+select f.titolo
+from film f join proiezioni p on f.codfilm=p.codfilm
+where f.titolo not in (select f.titolo from film f join proiezioni p on f.codfilm=p.codfilm
+                        where p.incasso<500)
+
+/*32*/
+
+select a.nome
+from film f join recita r on r.codfilm=f.codfilm join attori a on a.codattore=r.codattore
+where a.nome not in (select a.nome from film f join
+                    recita r on r.codfilm=f.codfilm join
+                    attori a on a.codattore=r.codattore
+                    where f.regista = 'Fellini')
+
+/*33*/
+
+select f.titolo
+from film f join recita r on r.codfilm=f.codfilm join attori a on a.codattore=r.codattore
+where f.regista like '%Nolan%' and f.titolo not in (select f.titolo from film f join
+                                                    recita r on r.codfilm=f.codfilm join
+                                                    attori a on a.codattore=r.codattore
+                                                    where f.regista = 'Fellini')
+/*DA SISTEMARE*/
+
