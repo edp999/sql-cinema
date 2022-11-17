@@ -96,3 +96,14 @@ group by s.citta
 
 /*17*/
 
+select f.regista, count(j.titolo)
+from film f left join (select titolo, codfilm from film where annoproduzione>1990) j on f.codfilm=j.codfilm
+group by f.regista
+
+/*18*/
+
+select f.regista, sum(p.incasso)
+from film f join proiezioni p on f.codfilm=p.codfilm
+group by f.regista
+
+/*19*/
