@@ -25,7 +25,7 @@ select titolo from film where regista =
 /*6*/
 
 select f.titolo, f.genere from film f join proiezioni p on f.codfilm = p.codfilm
-where p.dataproiezione = '22 May 2022'
+where p.dataproiezione = '25 Dec 2004'
 
 /*7*/
 
@@ -35,7 +35,7 @@ where p.dataproiezione = '25 Dec 2004' and s.citta='Napoli'
 
 /*8*/
 
-select s.sale from film f join proiezioni p on f.codfilm = p.codfilm
+select s.nome from film f join proiezioni p on f.codfilm = p.codfilm
     join sale s on p.codsala = s.codsala join recita r on f.codfilm = r.codfilm
         join attori a on r.codattore = a.codattore
 where s.citta='Napoli' and p.dataproiezione = '25 Dec 2004' and a.nome = 'R.Williams'
@@ -45,14 +45,17 @@ where s.citta='Napoli' and p.dataproiezione = '25 Dec 2004' and a.nome = 'R.Will
 select f.titolo
 from film f join recita r on f.codfilm = r.codfilm
     join attori a on r.codattore = a.codattore
-where a.nome = 'M.Mastroianni' or a.nome = 'S.Loren'
+where a.nome = 'M. Mastroianni' or a.nome = 'S. Loren'
 
 /*10*/
 
 select f.titolo
 from film f join recita r on f.codfilm = r.codfilm
     join attori a on r.codattore = a.codattore
-where a.nome = 'M.Mastroianni' and a.nome = 'S.Loren'
+where a.nome = 'M. Mastroianni' and f.titolo = any (select f.titolo
+from film f join recita r on f.codfilm = r.codfilm
+    join attori a on r.codattore = a.codattore
+where a.nome = 'S. Loren')
 
 /*11*/
 
