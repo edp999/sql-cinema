@@ -129,7 +129,7 @@ order by f.regista
 select f.regista, f.titolo, count(a.nome)
 from film f join recita r on f.codfilm=r.codfilm join attori a on a.codattore=r.codattore
 group by f.titolo, f.regista
-having count(a.nome)>2
+having count(a.nome)<6
 
 /*22*/
 
@@ -151,3 +151,28 @@ select f.titolo, sum(p.incasso)
 from film f join proiezioni p on f.codfilm=p.codfilm
 where f.genere = 'drammatico'
 group by f.titolo
+
+/*25*/
+
+select f.titolo, sum(p.incasso)
+from film f join proiezioni p on f.codfilm=p.codfilm
+where f.genere like '%Drammatico%' and extract(year from p.dataProiezione) >2015
+group by f.titolo
+
+/*26*/
+
+select f.titolo, sum(p.incasso), p.dataProiezione
+from film f join proiezioni p on f.codfilm=p.codfilm
+where f.genere like '%Drammatico%' and p.dataProiezione != all (select dataProiezione from proiezioni where dataproiezione<'2005-01-01')
+group by f.titolo, p.dataProiezione
+
+/*27*/
+
+select s.nome, sum(p.incasso)
+from sale s join proiezioni p on s.codsala=p.codsala 
+where extract(year from p.dataProiezione)='2015'
+group by s.nome
+having sum(p.incasso)>20000
+
+/*28*/
+
