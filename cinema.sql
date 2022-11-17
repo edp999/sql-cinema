@@ -176,3 +176,11 @@ having sum(p.incasso)>20000
 
 /*28*/
 
+select f.titolo
+from film f join proiezioni p on f.codfilm=p.codfilm
+where f.titolo not in (select f.titolo from film f join proiezioni p on f.codfilm=p.codfilm join
+                        sale s on p.codsala=s.codsala
+                        where s.citta='Roma')
+
+/*29*/
+
