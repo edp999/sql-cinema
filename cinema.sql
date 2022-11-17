@@ -131,3 +131,13 @@ from film f join recita r on f.codfilm=r.codfilm join attori a on a.codattore=r.
 group by f.titolo, f.regista
 having count(a.nome)>2
 
+/*22*/
+
+select f.codfilm, f.titolo, sum(p.incasso)
+from film f join proiezioni p on f.codfilm=p.codfilm
+where annoproduzione>2000
+group by f.codfilm, f.titolo
+
+/*23*/
+
+
