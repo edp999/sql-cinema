@@ -59,4 +59,11 @@ where a.nome = 'S. Loren')
 
 /*11*/
 
-                                        
+select f.titolo, a.nome
+from film f join recita r on f.codfilm=r.codfilm join attori a on a.codAttore=r.codAttore
+group by a.nome, f.titolo, a.nazionalita
+having a.nazionalita='Italiana'
+
+/*12*/
+
+
