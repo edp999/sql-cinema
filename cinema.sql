@@ -147,3 +147,7 @@ group by f.titolo
 
 /*24*/
 
+select f.titolo, sum(p.incasso)
+from film f join proiezioni p on f.codfilm=p.codfilm
+where f.genere = 'drammatico'
+group by f.titolo
